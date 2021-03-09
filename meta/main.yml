@@ -1,0 +1,10 @@
+galaxy_info:
+  author: Matheus Perez
+  description: Role to install and configure Zabbix 4.2
+  license: GPLv3
+  min_ansible_version: 2.9
+  platforms:
+    - name: CentOS
+      versions:
+      - 8
+dependencies: []

@@ -1,0 +1,14 @@
+---
+- name: Install httpd e php
+  package:
+    name:
+      - httpd
+      - php
+    state: present
+
+- name: Start and enable nginx at system startup
+  systemd:
+    name: httpd
+    enabled: yes
+    state: started
+  notify: Restart Zabbix_httpd

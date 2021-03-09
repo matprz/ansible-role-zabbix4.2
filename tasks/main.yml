@@ -1,0 +1,28 @@
+---
+- name: Include variables OS
+  include_vars: vars/{{ ansible_os_family }}.yml
+
+- name: Change selinux
+  include: "selinux.yml"
+  when: ansible_os_family == "RedHat"
+  tags: zabbix:selinux
+
+- name: Update machine
+  include: "update.yml"
+  when: ansible_os_family == "RedHat"
+  tags: zabbix:update
+
+- name: Install Httpd
+  include: "httpd.yml"
+  when: ansible_os_family == "RedHat"
+  tags: zabbix:mariadb
+
+- name: Install MariaDB
+  include: "mariadb.yml"
+  when: ansible_os_family == "RedHat"
+  tags: zabbix:mariadb
+
+- name: Install HTTPd e Zabbix Server
+  include: "install.yml"
+  when: ansible_os_family == "RedHat"
+  tags: zabbix:install

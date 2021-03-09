@@ -1,0 +1,13 @@
+---
+zabbix_server: zabbix-server
+mysql_root_password: root
+zabbix_httpd: httpd
+zabbix_php: php
+zabbix_agent: zabbix-agent
+
+zabbix_server_etc_dir: /etc/zabbix/
+zabbix_server_log_dir: /var/log/zabbix/
+zabbix_server_pid_dir: /var/run/zabbix/
+zabbix_server_lib_dir: /usr/lib/zabbix/
+
+zabbix_httpd_etc_dir: /etc/httpd/conf.d/zabbix.conf 

@@ -1,0 +1,15 @@
+---
+- name: Restart Zabbix_httpd
+  service:
+    name: "{{ zabbix_httpd }}"
+    state: restarted
+
+- name: Restart Zabbix_server
+  service:
+    name: "{{ zabbix_server }}"
+    state: restarted
+
+- name: Restart Zabbix_agent
+  service:
+    name: "{{ zabbix_agent }}"
+    state: restarted

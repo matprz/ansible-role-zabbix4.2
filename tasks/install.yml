@@ -1,0 +1,60 @@
+---
+- name: Install Zabbix Server
+  package:
+    name:
+      - zabbix-server-mysql
+      - zabbix-agent
+      - zabbix-get
+    state: present
+    disable_gpg_check: yes
+
+- name: Install Zabbix fronted packages
+  package:
+    name:
+      - zabbix-web-mysql
+    state: present
+
+- name: Copy of the Zabbix Server configuration file
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ zabbix_server_etc_dir }}/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - zabbix_server.conf
+
+- name: Copy the Zabbix_php configuration file
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ zabbix_httpd_etc_dir }}/zabbix.conf"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - zabbix_php.conf
+
+- name: Imports schema and data
+  shell: zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -u{{ zabbix_db_user }} -p{{ zabbix_db_password }} {{ zabbix_db_name }}
+  tags: zabbix:importdb
+
+- name: Start and enable httpd at system startup
+  systemd:
+    name: httpd
+    enabled: yes
+    state: started
+  notify: Restart Zabbix_httpd
+
+- name: Start and enable the Zabbix Agent at system startup
+  systemd:
+    name: zabbix-agent
+    enabled: yes
+    state: started
+  notify: Restart Zabbix_agent
+
+- name: Start and enable Zabbix Server at system startup
+  systemd:
+    name: zabbix-server
+    enabled: yes
+    state: started
+  notify: Restart Zabbix_server

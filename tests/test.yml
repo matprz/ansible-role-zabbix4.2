@@ -1,0 +1,8 @@
+---
+- hosts: zabbixserver
+  become: yes
+  remote_user: vagrant
+  roles:
+    - ansible-role-zabbix
+  vars:
+    vault_zabbix_db_password: "mypassword"
