@@ -1,12 +1,12 @@
 Zabbix Role
 =========
 
-Role for installing and configuring Zabbix 5.0
+Role for installing and configuring Zabbix 4.2
 
 Requirements
 ------------
 
-At this moment the script only works on Redhat/Centos 8.x. This script works with MySQL, MariaDB, Nginx and PHP.
+At this moment the script only works on Redhat/Centos 8.x, and Amazon linux 2. This script works with MySQL, MariaDB, Apache and PHP.
 
 Role Variables
 --------------
